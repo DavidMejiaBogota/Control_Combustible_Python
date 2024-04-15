@@ -1,7 +1,7 @@
 #Este archivo docker-compose.yml tiene la función de definir y gestionar la configuración de
 #una aplicación compuesta por múltiples contenedores Docker.
 
-version: '3.9'
+version: '3.11'
 services:
   web:
     build: .
@@ -10,3 +10,15 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
+  
+  db:
+    image: postgres:15
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=control_combustible
+
+volumes:
+  pg_data:
+    
