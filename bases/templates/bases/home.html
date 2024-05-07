@@ -4,7 +4,9 @@
 {% include "fragments/titulo.html" with titulo="Inicio" %}
 
     {% include "fragments/card_start.html" with header="Binevenido a la aplicación" %}
-      <h4 class="card-title">Danger card title</h4>
+      <h4 class="card-title">{% if user.is_authenticated %} Binevenido {{user.email}} {% else %}
+        <a href="{% url 'usuarios:login' %}">Login</a> {% endif %}
+      </h4>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     {% include "fragments/card_finish.html" %}
 {%endblock%}
