@@ -3,8 +3,10 @@
 {% block titulo %} Acerca de la APP {% endblock%}
 
 {% block contenido %}
+{% include "fragments/titulo.html" with titulo="Acerca de la App" %}
 
-<div class="text-warning">
-    Aplicación para el control de Combustible <b>x J. David Mejía M. </b>
-</div>
+    {% include "fragments/card_start.html" with header="Acerca de la APP" %}
+      <h4 class="card-title">Danger card title</h4>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    {% include "fragments/card_finish.html" %}
 {%endblock%}
