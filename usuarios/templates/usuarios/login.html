@@ -4,12 +4,12 @@
 
 {% include "fragments/titulo.html" with titulo="Login" %}
 
-{% include "fragments/card_start.html" with header="Indica credenciales de acceso" %}
-    <from method="post">
+{% include "fragments/card_start.html" with header="Indica credenciales para accesar" %}
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p}}
         <button type="submit">Acceder</button>
-    </from>
+    </form>
 {% include "fragments/card_finish.html" %}
 
-    {%endblock%}
+{%endblock%}
