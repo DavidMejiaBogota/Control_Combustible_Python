@@ -4,3 +4,5 @@ sqlparse==0.4.4
 typing_extensions==4.11.0
 tzdata==2024.1
 psycopg[binary]
+django-crispy-forms==2.1
+crispy-bootstrap5==2024.2
