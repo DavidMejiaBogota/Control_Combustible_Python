@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.x',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +58,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -161,8 +161,8 @@ AUTHENTICATION_BACKENDS = [
     #Si utilizamos el login de django,
     'django.contrib.auth.backends.ModelBackend',
     #Utilizando el Allauth
-    'allatuh.account.auth_backends.AuthenticationBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 SITES_ID = 1
-ACCOUNT_EMAIL_VERIFICATION = 'nose'
+ACCOUNT_EMAIL_VERIFICATION = 'none'

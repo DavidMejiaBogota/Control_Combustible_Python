@@ -23,6 +23,8 @@ ENV PYTHONUNBUFFERED 1
 #facilitar la ejecución de comandos relacionados con el código de la aplicación.
 WORKDIR /code
 
+RUN python -m pip install --upgrade pip
+
 #instalar todas las dependencias de la aplicación
 COPY ./requirements.txt .
 
