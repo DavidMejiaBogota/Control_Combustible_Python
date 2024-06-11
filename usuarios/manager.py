@@ -34,8 +34,8 @@ class CustomUserManager(BaseUserManager):
         otros_campos.setdefault('is_superuser', True)
         otros_campos.setdefault('is_active', True)
 
-        if otros_campos.get('is_staff') is not True:
-            raise ValueError(_("is_staff debe ser True para ser super usuarios"))
+        if otros_campos.get("is_staff") is not True:
+            raise ValueError(_("is_staff debe ser True para ser super usuario"))
         
         if otros_campos.get('is_superuser') is not True:
             raise ValueError(_("is_superuser debe ser True para ser super usuario"))
