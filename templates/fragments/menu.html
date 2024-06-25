@@ -15,9 +15,15 @@
                     <div class="collapse navbar-collapse" id="navbarColor01">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{% url 'core:home' %}">Inicio
+                                <!-- <a class="nav-link active" href="{% url 'core:home' %}">Inicio
                                     <span class="visually-hidden">(current)</span>
-                                </a>
+                                </a> -->
+                                <div class="nav-link"
+                                hx-get="{% url 'core:home' %}" hx-push="true"
+                                hx-trigger="click"
+                                hx-target="body"
+                                hx-swap="outerHTML"
+                                >Inicio</div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Registrar</a>
