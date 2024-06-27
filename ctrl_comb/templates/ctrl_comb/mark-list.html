@@ -1,0 +1,28 @@
+{% if obj %}
+<tabla class="table table-striped table-hover">
+    <thead>
+        <ht>ID</ht>
+        <ht>Descripción</ht>
+        <ht>Acciones</ht>
+    </thead>
+    <tbody>
+        {% for o in obj %}
+        <tr>
+            <td>{{o.id}}</td>
+            <td>{{o.descript}}</td>
+            <td>
+               <i class="bi bi-trash3"
+               style="cursor: pointer;"
+               ></i> 
+
+               <i class="bi bi-pencil-square"
+               style="cursor: pointer;"
+               ></i> 
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</tabla>
+{% else %}
+<p>No hay registros</p>
+{% end if %}
