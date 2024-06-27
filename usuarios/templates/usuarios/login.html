@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 
 {% block contenido %}
 
 {% include "fragments/titulo.html" with titulo="Login" %}
 
 {% include "fragments/card_start.html" with header="Indica credenciales para accesar" %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form|crispy}}
-        <button type="submit">Acceder</button>
-    </form>
+<form hx-post="{% url 'usuarios:login' %}" hx-target="#body"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    {#% csrf_token %#}
+    {{ form.as_p}}
+    <button type="submit">Acceder</button>
+</form>
 {% include "fragments/card_finish.html" %}
 
 {%endblock%}
