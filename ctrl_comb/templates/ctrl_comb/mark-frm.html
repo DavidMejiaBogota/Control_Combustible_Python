@@ -1,19 +1,20 @@
-<form class="d-flex aling-item-center" method="POST">
+<form hx-post="{% url 'control:mark_save' %}" hx-target="#list"
+class="d-flex aling-item-center" method="POST">
     <fieldset>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-grup">
                     <label for="id" class="form-label">Id</label>
-                    <imput type="text" class="form-control" id="id" aria-describedby="idhelp"
+                    <input type="text" class="form-control" id="id" aria-describedby="idhelp"
                     name="id" placeholder="Id" readonly value="{{obj.id}}">
-                    <small id="idhelp" class="form-text text-muted">Id</small>
+                    <small id="idthelp" class="form-text text-muted">Id</small>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-grup">
                     <label for="descript" class="form-label">Descripción</label>
-                    <imput type="text" class="form-control" id="descript" aria-describedby="idhelp"
-                    name="descript" placeholder="Descripción" readonly value="{{obj.descript}}">
+                    <input type="text" class="form-control" id="descript" aria-describedby="idhelp"
+                    name="descript" placeholder="Descripción" value="{{obj.descript}}">
                     <small id="descripthelp" class="form-text text-muted">Descripción</small>
                 </div>
             </div>
