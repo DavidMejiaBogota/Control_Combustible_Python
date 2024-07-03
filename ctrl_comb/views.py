@@ -29,9 +29,11 @@ def mark_save(request):
             o.save()
         else:
             o = Mark.objects.create(descript = d)
-            
+
     obj = Mark.objects.all().order_by("descript")
+    r = Mark.objects.filter(id=o.id).first()
     context["obj"] = obj
+    context["reg"] = r
 
     return render(request,template_name,context)
 

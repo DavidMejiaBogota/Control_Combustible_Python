@@ -32,3 +32,6 @@
 {% else %}
 <p>No hay registros</p>
 {% endif %}
+
+<input type="text" class="form-control" id="id" aria-describedby="idhelp" name="id" placeholder="id"
+readonly value="{{reg.id}}" hx-swap-oob="true">
