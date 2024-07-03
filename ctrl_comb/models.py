@@ -17,3 +17,19 @@ class Mark(models.Model): #Mark es el nombre de la tabla/modelo
         verbose_name = 'Marca' #Descripción singular del modelo
         verbose_name_plural = 'Marcas' #Descripción del plural del modelo
         ordering = ['descript'] #Ordenamiento del modelo. El ordenamiento se basará en el campo 'descript'
+
+class Modelo(models.Model):
+    descript = models.CharField(
+        max_length=50,
+        db_comment = "Descripción del Modelo de Vehículo",
+    )
+
+    mark = models.ForeignKey(Mark,on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f"{self.mark} - {self.descript}"
+    
+    class Meta:
+        verbose_name_plural = "Modelos"
+        db_table_comment = "Modelos de Vehículos"
+        
