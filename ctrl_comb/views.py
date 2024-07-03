@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import *
 
 from .models import *
+from .forms import *
 
 class MarkList(ListView):
     template_name="ctrl_comb/mark.html"
@@ -16,8 +17,19 @@ def mark_save(request):
     if request.method=="POST":
         i = request.POST.get("id")
         d = request.POST.get("descript")
+        o = None
 
-        o = Mark.objects.create(descript = d)
+        if i:
+            o = Mark.objects.filter(id=i).first()
+        else: 
+            o = Mark.objects.filter(descript=d).first()
+        
+        if o:
+            o.descript = d
+            o.save()
+        else:
+            o = Mark.objects.create(descript = d)
+            
     obj = Mark.objects.all().order_by("descript")
     context["obj"] = obj
 
@@ -34,4 +46,18 @@ def mark_delete(request,pk):
     context["obj"] = obj
 
     return render(request,template_name,context)
+
+def mark_edit(request,pk=None):
+    context={}
+    template_name = "ctrl_comb/mark-frm.html"
+
+    if pk:
+        o = Mark.objects.filter(id=pk).first()
+        frm = MarkForm(instance=o)
+    else:
+        frm = MarkForm()
     
+    context["frm"] = frm
+    context["obj"] = o
+
+    return render(request,template_name,context)
