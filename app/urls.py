@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('',include('bases.urls')),
     path('admin/', admin.site.urls),
+    path('',include('bases.urls')),
     path('pages/', include('paginas.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('accounts/', include('allauth.urls')),
-    path('control/', include(('ctrl_comb.urls','control'),namespace='control')),
+    path('control/', include(('ctrl_comb.urls','control'),namespace="control")),
+    
 ]

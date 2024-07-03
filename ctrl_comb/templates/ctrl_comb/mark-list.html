@@ -1,9 +1,9 @@
 {% if obj %}
 <tabla class="table table-striped table-hover">
     <thead>
-        <ht>ID</ht>
-        <ht>Descripción</ht>
-        <ht>Acciones</ht>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
     </thead>
     <tbody>
         {% for o in obj %}
@@ -25,4 +25,4 @@
 </tabla>
 {% else %}
 <p>No hay registros</p>
-{% end if %}
+{% endif %}

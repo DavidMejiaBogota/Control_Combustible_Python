@@ -8,7 +8,6 @@
                     name="id" placeholder="Id" readonly value="{{obj.id}}">
                     <small id="idhelp" class="form-text text-muted">Id</small>
                 </div>
-                
             </div>
             <div class="col-md-6">
                 <div class="form-grup">
@@ -20,10 +19,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6"><button type="submit" class="btn btn-success btn-sm">Guardar</button> </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+            </div>
             <div class="col-md-6">
                 <button type="button" class="btn btn-info btn-sm"
-                hx-get="{% url 'control:mark-list' %}" hx-target="#body"
+                hx-get="{% url 'control:mark_list' %}" hx-target="#body"
                 >Limpiar</button>
             
             </div>
