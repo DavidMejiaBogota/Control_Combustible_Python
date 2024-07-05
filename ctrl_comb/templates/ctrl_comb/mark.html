@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block contenido %}
 {% include "fragments/titulo.html" with titulo="Marca Vehículo" %}
@@ -19,3 +20,15 @@
 
     {% include "fragments/card_finish.html" %}
 {%endblock%}
+
+{% block js %}
+<script>
+$(function(){
+    $("#tbl").DataTable({
+        language:{
+            url: "{% static 'plugins/datatable/es.json' %}"
+        }
+    })
+})
+</script>
+{% endblock%}
