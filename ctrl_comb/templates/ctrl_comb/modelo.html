@@ -17,7 +17,9 @@
         <tbody>
             {% for o in obj %}
             <tr>
-                <td></td>
+                <td>
+                    <a href="{% url 'control:modelo_edit' o.id %}" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> </a>
+                </td>
                 <td>{{ o.mark }}</td>
                 <td>{{ o.descript }}</td>
             </tr>
