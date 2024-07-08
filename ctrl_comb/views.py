@@ -63,3 +63,9 @@ def mark_edit(request,pk=None):
     context["obj"] = o
 
     return render(request,template_name,context)
+
+class ModeloList(ListView):
+    template_name ="ctrl_comb/modelo.html"
+    model=Modelo
+    context_object_name = "obj"
+    ordering = ["mark","descript"]
