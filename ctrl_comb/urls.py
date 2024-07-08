@@ -9,4 +9,5 @@ urlpatterns = [
 
 
     path("models/",ModeloList.as_view(),name="modelo_list"),
+    path("models/new",ModeloNew.as_view(),name="modelo_new"),
 ]

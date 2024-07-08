@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import *
+from django.urls import reverse_lazy
 
 from .models import *
 from .forms import *
@@ -69,3 +70,10 @@ class ModeloList(ListView):
     model=Modelo
     context_object_name = "obj"
     ordering = ["mark","descript"]
+
+class ModeloNew(CreateView):
+    model=Modelo
+    template_name="ctrl_comb/modelo_form.html"
+    context_object_name="obj"
+    form_class=ModeloForm
+    success_url=reverse_lazy("control:modelo_list")
