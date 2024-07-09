@@ -90,3 +90,17 @@ class ModeloDelete(DeleteView):
     template_name="bases/delete.html"
     context_object_name="obj"
     success_url=reverse_lazy("control:modelo_list")
+
+class ModeloEditModal(UpdateView):
+    model=Modelo
+    template_name="ctrl_comb/modelo_modal.html"
+    context_object_name="obj"
+    form_class=ModeloForm
+    success_url=reverse_lazy("control:modelo_list")
+
+class ModeloNewModal(CreateView):
+    model=Modelo
+    template_name="ctrl_comb/modelo_modal.html"
+    context_object_name="obj"
+    form_class=ModeloForm
+    success_url=reverse_lazy("control:modelo_list")

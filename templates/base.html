@@ -27,6 +27,9 @@
         </div>
     </div>
     
+    <div class="modal fade" id="popup">
+
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -40,6 +43,22 @@
 
     <!--SweetAlert-->
     <script src="{% static 'js/sweetalert.js' %} "></script>
+    <script>
+        function abrir_modal(url){
+            $("#popup").load(url,function(){
+                $(this).modal({
+                    backdrop:"static",
+                    keyboard:false
+                })
+                $(this).modal('show')
+            })
+        }
+        function cerrar_modal(){
+            $("#popup").modal("hide")
+            return false;
+        }
+    </script>
+
     {% block js %}
     {% endblock%}
 </body>
