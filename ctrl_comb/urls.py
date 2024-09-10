@@ -15,4 +15,6 @@ urlpatterns = [
     path("models/delete/<int:pk>",ModeloDelete.as_view(),name="modelo_delete"), #Elimina los modelos de vehículos
     path("models/modal/<int:pk>",ModeloEditModal.as_view(),name="modelo_edit_modal"), #Actualiza/Edita el modelo del vehículo
     path("models/modal/new",ModeloNewModal.as_view(),name="modelo_new_modal"), #Crea el modelo del vehículos.
+    path("models/dt",modelo_dt,name="modelo_dt"),
 ]
+    

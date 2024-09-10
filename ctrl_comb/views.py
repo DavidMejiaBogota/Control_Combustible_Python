@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import *
 from django.urls import reverse_lazy
+from django.db.models import Q
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.http import JsonResponse
 
 from .models import *
 from .forms import *
@@ -104,3 +107,54 @@ class ModeloNewModal(CreateView):
     context_object_name="obj"
     form_class=ModeloForm
     success_url=reverse_lazy("control:modelo_list")
+
+def modelo_dt(request):
+    context = {}
+    datos = request.GET
+ 
+    #Captura de los parametros que se están enviando
+    draw = int(datos.get("draw"))
+    start = int(datos.get("start"))
+    length = int(datos.get("length"))
+    search = datos.get("search[alue]")
+
+    #Consulta a la base de datos
+    registros = Modelo.objects.all()
+
+    if search:
+        registros = registros.filter(
+            Q(mark__descript__icontains=search) |
+            Q(descript__icontains=search)
+        )
+    
+    recordsTotal = registros.count()
+    
+    #Se prepara la salida
+    context["draw"] = draw
+    context["recordsTotal"] = recordsTotal
+    context["recordsFiltered"] = recordsTotal
+
+    #Paginación
+    reg = registros[start:start + length]
+    paginator = Paginator(reg,length)
+
+    #Obtener object list
+    try:
+        obj = paginator.page(draw).object_list
+    except PageNotAnInteger:
+        obj = paginator.page(draw).object_list
+    except EmptyPage:
+        obj = paginator.page(paginator.num_pages).object_list
+    
+#    datos = []
+#    for o in obj:
+#        datos.append({"id":o.id,"mark":o.mark__descript,"descript":o.descript})
+
+    datos = [
+        {
+            "id" : o.id, "mark" : o.mark.descript, "descript" : o.descript
+        } for o in obj
+    ]
+    #Envío de la información al frontEnd
+    context["datos"] = datos
+    return JsonResponse(context,safe=False)
