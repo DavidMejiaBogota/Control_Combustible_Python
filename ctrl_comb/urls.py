@@ -17,4 +17,3 @@ urlpatterns = [
     path("models/modal/new",ModeloNewModal.as_view(),name="modelo_new_modal"), #Crea el modelo del vehículos.
     path("models/dt",modelo_dt,name="modelo_dt"),
 ]
-    
