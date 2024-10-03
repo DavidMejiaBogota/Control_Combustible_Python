@@ -37,70 +37,13 @@
 {%endblock%}
 
 {% block js %}
-
-
-<script>
-    function borrar(id,d)
-    {
-        Swal.fire({
-        title: "¿Procede a borrar el registro? "+d,
-        text: "¡No podrá revertir esto! ",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, eliminar " + d,
-        }).then((result) => {
-        if (result.isConfirmed) {
-            var url=`{% url 'control:modelo_list' %}delete/${id}`
-            $.ajax({
-                headers:{"X-CSRFToken":"{{ csrf_token }}"},
-                type:"POST",
-                url:url,
-                success: function(r,textStatus,xhr){
-                    if(xhr.status==200){
-                        Swal.fire('Borrado',`${d}, Borrado Satisfactoriamente`,'success').then(
-                            function(){
-                                //location.reload()
-                                tbl.ajax.reload()
-                            }
-                        )
-                    }
-                },
-                error: function(jqXHR,textStatus,error){Swal.fire("Error",textStatus,"error")}
-            })
-        }
-        });
-    }
-
-
-    $("#tbl").on("click","td.editor-delete",function(e){
-        e.preventDefault()
-        var rows = tbl.rows(this).data()
-        //console.log(rows)
-        var row = rows[0]
-        //console.log(row)
-        var id = row.id
-        var d = row.descript
-        borrar(id,row.descript)
-    })
-
-    $("#tbl").on("click","td.editor-edit",function(e){
-        e.preventDefault()
-        var rows = tbl.rows(this).data()
-        //console.log(rows)
-        var row = rows[0]
-        //console.log(row)
-        var id = row.id
-        var url = `/control/models/modal/${id}`
-        //alert(url)
-        abrir_modal(url)
-    })
-</script>
-
 {% endblock%}
+
 {% block dtName %}#tbl{% endblock %}
 {% block dtColumns %}
 {data:"mark"},{data:"descript"}
 {% endblock%}
 {% block dtUrl %}{% url 'control:modelo_dt' %}{% endblock %}
+{% block dtUrlEdit %}/control/models/modal{% endblock %}
+{% block dtUrlDelete %}{% url 'control:modelo_list' %}delete/{% endblock %}
+{% block dtDescDelete %}mark,descript,algo{% endblock %}

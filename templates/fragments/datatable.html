@@ -17,5 +17,70 @@ $(function(){
 
     })
 })
+
+    function borrar(id,d,url)
+    {
+        Swal.fire({
+        title: `¿Procedo?`,
+        text: `Procedes a eliminar ${d}`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar " + d,
+        }).then((result) => {
+        if (result.isConfirmed) {
+            url = `${url}${id}`
+            $.ajax({
+                headers:{"X-CSRFToken":"{{ csrf_token }}"},
+                type:"POST",
+                url:url,
+                success: function(r,textStatus,xhr){
+                    if(xhr.status==200){
+                        Swal.fire('Borrado',`${d}, Borrado Satisfactoriamente`,'success').then(
+                            function(){
+                                //location.reload()
+                                tbl.ajax.reload()
+                            }
+                        )
+                    }
+                },
+                error: function(jqXHR,textStatus,error){Swal.fire("Error",textStatus,"error")}
+            })
+        }
+        });
+    }
+
+
+    $("#tbl").on("click","td.editor-delete",function(e){
+        e.preventDefault()
+        var rows = tbl.rows(this).data()
+        //console.log(rows)
+        var row = rows[0]
+        //console.log(row)
+        var id = row.id
+        //var d = row.descript
+        var d = ""
+        descDelete.split(",").forEach(e => {
+            if(row.hasOwnProperty(e)){
+                if(d.length>0){
+                    d += " "
+                }
+                d += row[e]
+            }
+        });
+        borrar(id,d,urlDelete)
+    })
+
+    $("#tbl").on("click","td.editor-edit",function(e){
+        e.preventDefault()
+        var rows = tbl.rows(this).data()
+        //console.log(rows)
+        var row = rows[0]
+        //console.log(row)
+        var id = row.id
+        var url = `${dtUrlEdit}/${id}`
+        //alert(url)
+        abrir_modal(url)
+    })
 </script>
-    
