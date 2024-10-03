@@ -32,4 +32,7 @@ class Modelo(models.Model):
     class Meta:
         verbose_name_plural = "Modelos"
         db_table_comment = "Modelos de Vehículos"
+        permissions = [
+            ("permiso_especial","Puede leer y editar Modelos")
+        ]
         
