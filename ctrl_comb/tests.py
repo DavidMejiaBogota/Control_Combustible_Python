@@ -31,7 +31,7 @@ class ModeloTest(TestCase):
         response = self.client.get(reverse("control:modelo_list"))
         self.assertEqual(response.status_code,302)
     
-    def test_vista_modelo_susario_autenticado(self):
+    def test_vista_modelo_usuario_autenticado(self):
         self.client.login(email="test@test.com",password="Popepi2607*")
         self.user.user_permissions.add(self.ver_modelo)
         response = self.client.get(reverse("control:modelo_list"))

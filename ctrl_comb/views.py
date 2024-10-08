@@ -7,18 +7,20 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
-from django.http import HttpResponseRedirect
-from django.contrib.auth.models import AnonymousUser
+
 
 from .models import *
 from .forms import *
+from bases.views import SinAutorizacion
 
-class MarkList(LoginRequiredMixin,ListView):
+#class MarkList(LoginRequiredMixin,ListView):
+class MarkList(SinAutorizacion,ListView):
     template_name="ctrl_comb/mark.html"
     model=Mark
     context_object_name="obj"
     ordering=["descript"]
     login_url = "usuarios:login"
+    permission_required = "ctrl_comb.view_mark"
 
 def mark_save(request):
     context={}
@@ -74,16 +76,18 @@ def mark_edit(request,pk=None):
 
     return render(request,template_name,context)
 
-class ModeloList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+#class ModeloList(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+class ModeloList(SinAutorizacion,ListView):
     template_name ="ctrl_comb/modelo.html"
     model=Modelo
     context_object_name = "obj"
     ordering = ["mark","descript"]
     login_url = "usuarios:login"
     permission_required = "ctrl_comb.view_modelo"
-    raise_exception = False
-    redirect_field_name = "redirect_to"
+    #raise_exception = False
+    #redirect_field_name = "redirect_to"
 
+"""
     def form_invalid(self,form):
         response = super().form_invalid(form)
         if self.request.is_ajax():
@@ -95,7 +99,7 @@ class ModeloList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         if not self.request.user == AnonymousUser():
             self.login_url = "pages:forbidden"
         return HttpResponseRedirect(reverse_lazy(self.login_url))
-
+"""
 
 
 class ModeloNew(CreateView):
