@@ -1,7 +1,6 @@
 #Este archivo docker-compose.yml tiene la función de definir y gestionar la configuración de
 #una aplicación compuesta por múltiples contenedores Docker.
 
-version: '3.11'
 services:
   web:
     build: .

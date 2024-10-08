@@ -1,9 +1,12 @@
 from django.db import models
 
+from bases.models import ClaseModelo
+
 '''
 Se define una clase Mark que hereda de models.Model.
-Esto significa que Mark es un modelo de Django y representará una tabla en la base de datos.'''
-class Mark(models.Model): #Mark es el nombre de la tabla/modelo
+Esto significa que Mark es un modelo de Django y representará una tabla en la base de datos.
+'''
+class Mark(ClaseModelo): #Mark es el nombre de la tabla/modelo
     descript = models.CharField( #descript es el nombre del campo. models.CharField: Es un tipo de campo para almacenar cadenas de texto.
         max_length=50, #longitud maxima del campo
         unique=True, #indicador de que serán elementos únicos, no habrán dos con el mismo nombre.
@@ -18,7 +21,7 @@ class Mark(models.Model): #Mark es el nombre de la tabla/modelo
         verbose_name_plural = 'Marcas' #Descripción del plural del modelo
         ordering = ['descript'] #Ordenamiento del modelo. El ordenamiento se basará en el campo 'descript'
 
-class Modelo(models.Model):
+class Modelo(ClaseModelo):
     descript = models.CharField(
         max_length=50,
         db_comment = "Descripción del Modelo de Vehículo",
