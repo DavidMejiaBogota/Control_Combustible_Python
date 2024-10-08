@@ -5,23 +5,21 @@ from django.urls import reverse, resolve
 from .forms import CustomUserCreationForm
 from .views import RegistroUsuarioView
 
-
-# Create your tests here.
-
 """
 Esta clase define pruebas unitarias para verificar la funcionalidad de creación de usuarios 
 personalizados en Django. La prueba test_crear_usuario se encarga de crear un usuario utilizando
 el método create_user del modelo de usuario personalizado y luego verifica si los atributos
 del usuario creado son los esperados.
 """
-class CustomUserTest(TestCase):
+class CustomUserTests(TestCase):
     #Crear usuario
     def test_crear_usurio(self):
         Usr = get_user_model()
         usr = Usr.objects.create_user(
             username = "marketbi",
             email = "auxiliar1@marketbi.co",
-            password = "123"
+            password = "123",
+            first_name = "debs"
         )
         #Verificar los atributos del usuario
         self.assertEqual(usr.username,"marketbi")
@@ -35,7 +33,8 @@ class CustomUserTest(TestCase):
         usr = Usr.objects.create_superuser(
             username = "adminmarketbi",
             email = "admin1@marketbi.co",
-            password = "123"
+            password = "123",
+            first_name = "debs"
         )
         #Verificar los atributos del usuario
         self.assertEqual(usr.username,"adminmarketbi")

@@ -1,12 +1,12 @@
-from django.test import SimpleTestCase
+from django.test import TestCase, SimpleTestCase
 
-
-class HomePageTests(SimpleTestCase):
+class HomePageTests(TestCase):
+    databases = {"default"}
     def setUp(self):
-        self.response= self.client.get("/")
+        self.response = self.client.get("/")
     
     def test_url_home(self):
-        self.assertEqual(self.response.status_code, 200)
+        self.assertEqual(self.response.status_code,200)
     
     def test_plantilla_home(self):
         self.assertTemplateUsed(
