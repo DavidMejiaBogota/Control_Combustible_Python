@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from bases.models import ClaseModelo
 
@@ -38,4 +39,20 @@ class Modelo(ClaseModelo):
         permissions = [
             ("permiso_especial","Puede leer y editar Modelos"),
         ]
-        
+
+#Modelo para la creación de vehículos
+
+class Vehiculo(ClaseModelo):
+    modelo = models.ForeignKey(Modelo, on_delete=models.RESTRICT)
+    register = models.CharField(max_length=50,db_column="Matricula Vehículo",help_text="Matricula Vehículo")
+    year =  models.PositiveSmallIntegerField(help_text="Año del Vehículo")
+
+    def __str__(self):
+        return self.register
+    
+    def get_absolute_url(self):
+        return reverse("vehiculo_edid",kwargs={'pk':self.pk})
+    
+    class Meta:
+        verbose_name_plural = "Vehículos"
+        db_table_comment = "Vehículos"
