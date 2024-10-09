@@ -199,3 +199,68 @@ def modelo_dt(request):
     #Envío de la información al frontEnd
     context["datos"] = datos
     return JsonResponse(context,safe=False)
+
+class VehiculoList(SinAutorizacion,TemplateView):
+    template_name = "ctrl_comb/vehiculo.html"
+    login_url = "core:home"
+    permission_required = "ctrl_comb.view_vehiculo"
+
+@login_required(login_url="usuarios:login")
+@permission_required("ctrl_comb.view_vehiculo")
+def vehiculo_dt(request):
+    context = {}
+    datos = request.GET
+ 
+    #Captura de los parametros que se están enviando
+    draw = int(datos.get("draw"))
+    start = int(datos.get("start"))
+    length = int(datos.get("length"))
+    search = datos.get("search[alue]")
+
+    #Consulta a la base de datos
+    if request.user.is_superuser:
+        registros = Vehiculo.objects.all()
+    else:
+        registros = Vehiculo.objects.filter(uc = request.user)
+
+    if search:
+        registros = registros.filter(
+            Q(modelo__mark__descript__icontains=search) |
+            Q(modelo__descript__icontains=search) |
+            Q(register__icontains=search) |
+            Q(year__icontains=search)
+        )
+    
+    recordsTotal = registros.count()
+    
+    #Se prepara la salida
+    context["draw"] = draw
+    context["recordsTotal"] = recordsTotal
+    context["recordsFiltered"] = recordsTotal
+
+    #Paginación
+    reg = registros[start:start + length]
+    paginator = Paginator(reg,length)
+
+    #Obtener object list
+    try:
+        obj = paginator.page(draw).object_list
+    except PageNotAnInteger:
+        obj = paginator.page(draw).object_list
+    except EmptyPage:
+        obj = paginator.page(paginator.num_pages).object_list
+    
+
+
+    datos = [
+        {
+            "id" : o.id,
+            "mark" : o.modelo.mark.descript,
+            "modelo": o.modelo.descript,
+            "register": o.register,
+            "year": o.year
+        } for o in obj
+    ]
+    #Envío de la información al frontEnd
+    context["datos"] = datos
+    return JsonResponse(context,safe=False)

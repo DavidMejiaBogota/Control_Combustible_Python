@@ -16,4 +16,8 @@ urlpatterns = [
     path("models/modal/<int:pk>",ModeloEditModal.as_view(),name="modelo_edit_modal"), #Actualiza/Edita el modelo del vehículo
     path("models/modal/new",ModeloNewModal.as_view(),name="modelo_new_modal"), #Crea el modelo del vehículos.
     path("models/dt",modelo_dt,name="modelo_dt"),
+
+    #Rutas para le modelo Vehículo
+    path("vehicles/",VehiculoList.as_view(),name="vehiculo_list"), #Lista los vehículos.
+    path("vehicles/de",vehiculo_dt,name="vehiculo_dt"), #Lista los vehículos.
 ]
