@@ -32,3 +32,13 @@ def primera_vista(request):
 
 class HomeView(TemplateView):
     template_name = "bases/home.html"
+
+class MixinSaveUser:
+    def form_valid(self,form):
+        print(f"********{form.instance.id} ---- {self.request.user.id}************")
+
+        if form.instance.id:
+            form.instance.um = self.request.user
+        else:
+            form.instance.uc = self.request.user
+        return super().form_valid(form)

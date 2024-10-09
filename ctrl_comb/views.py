@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from .models import *
 from .forms import *
-from bases.views import SinAutorizacion
+from bases.views import SinAutorizacion,MixinSaveUser
 
 #class MarkList(LoginRequiredMixin,ListView):
 class MarkList(SinAutorizacion,ListView):
@@ -102,19 +102,23 @@ class ModeloList(SinAutorizacion,ListView):
 """
 
 
-class ModeloNew(CreateView):
+class ModeloNew(SinAutorizacion,MixinSaveUser,CreateView):
     model=Modelo
     template_name="ctrl_comb/modelo_form.html"
     context_object_name="obj"
     form_class=ModeloForm
     success_url=reverse_lazy("control:modelo_list")
+    login_url = "usuarios:login"
+    permission_required = "ctrl_comb.add_modelo"
 
-class ModeloEdit(UpdateView):
+class ModeloEdit(SinAutorizacion,MixinSaveUser,UpdateView):
     model=Modelo
     template_name="ctrl_comb/modelo_form.html"
     context_object_name="obj"
     form_class=ModeloForm
     success_url=reverse_lazy("control:modelo_list")
+    login_url = "usuarios:login"
+    permission_required = "ctrl_comb.change_modelo"
 
 class ModeloDelete(DeleteView):
     model=Modelo
@@ -122,20 +126,23 @@ class ModeloDelete(DeleteView):
     context_object_name="obj"
     success_url=reverse_lazy("control:modelo_list")
 
-class ModeloEditModal(UpdateView):
+class ModeloEditModal(SinAutorizacion,MixinSaveUser,UpdateView):
     model=Modelo
     template_name="ctrl_comb/modelo_modal.html"
     context_object_name="obj"
     form_class=ModeloForm
     success_url=reverse_lazy("control:modelo_list")
+    login_url = "usuarios:login"
+    permission_required = "ctrl_comb.change_modelo"
 
-class ModeloNewModal(CreateView):
+class ModeloNewModal(SinAutorizacion,MixinSaveUser,CreateView):
     model=Modelo
     template_name="ctrl_comb/modelo_modal.html"
     context_object_name="obj"
     form_class=ModeloForm
     success_url=reverse_lazy("control:modelo_list")
-
+    login_url = "usuarios:login"
+    permission_required = "ctrl_comb.add_modelo"
 
 @login_required(login_url="usuarios:login")
 @permission_required("ctrl_comb.view_modelo")
