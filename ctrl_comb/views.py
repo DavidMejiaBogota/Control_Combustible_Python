@@ -29,6 +29,8 @@ def mark_save(request):
     if request.method=="POST":
         i = request.POST.get("id")
         d = request.POST.get("descript")
+        print(f"***********{request.user}.{request.user.id} - -- {i}************")
+        u = request.user # u =User y request.user para capturar el usuario
         o = None
 
         if i:
@@ -38,9 +40,10 @@ def mark_save(request):
         
         if o:
             o.descript = d
+            o.um = u #Para guardar el usuario que se eestá enviando/capturando
             o.save()
         else:
-            o = Mark.objects.create(descript = d)
+            o = Mark.objects.create(descript = d, uc = u)
 
     obj = Mark.objects.all().order_by("descript")
     r = Mark.objects.filter(id=o.id).first()
