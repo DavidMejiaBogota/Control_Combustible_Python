@@ -51,7 +51,7 @@ class Vehiculo(ClaseModelo):
         return self.register
     
     def get_absolute_url(self):
-        return reverse("vehiculo_edid",kwargs={'pk':self.pk})
+        return reverse("vehiculo_edit",kwargs={'pk':self.pk})
     
     class Meta:
         verbose_name_plural = "Vehículos"

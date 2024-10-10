@@ -19,5 +19,6 @@ urlpatterns = [
 
     #Rutas para le modelo Vehículo
     path("vehicles/",VehiculoList.as_view(),name="vehiculo_list"), #Lista los vehículos.
-    path("vehicles/de",vehiculo_dt,name="vehiculo_dt"), #Lista los vehículos.
+    path("vehicles/dt",vehiculo_dt,name="vehiculo_dt"), #Lista los vehículos.
+    path("vehicles/new",VehiculoNewModal.as_view(),name="vehiculo_new"), #Crea el vehículo.
 ]

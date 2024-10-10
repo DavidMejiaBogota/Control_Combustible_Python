@@ -264,3 +264,12 @@ def vehiculo_dt(request):
     #Envío de la información al frontEnd
     context["datos"] = datos
     return JsonResponse(context,safe=False)
+
+class VehiculoNewModal(SinAutorizacion,MixinSaveUser,CreateView):
+    model=Vehiculo
+    template_name="ctrl_comb/vehiculo_modal.html"
+    context_object_name="obj"
+    form_class=VehiculoForm
+    success_url=reverse_lazy("control:vehiculo_list")
+    login_url = "usuarios:login"
+    permission_required = "ctrl_comb.add_vehiculo"
