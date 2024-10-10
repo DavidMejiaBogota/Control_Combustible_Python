@@ -21,4 +21,5 @@ urlpatterns = [
     path("vehicles/",VehiculoList.as_view(),name="vehiculo_list"), #Lista los vehículos.
     path("vehicles/dt",vehiculo_dt,name="vehiculo_dt"), #Lista los vehículos.
     path("vehicles/new",VehiculoNewModal.as_view(),name="vehiculo_new"), #Crea el vehículo.
+    path("vehicles/modal/<int:pk>",VehiculoEditModal.as_view(),name="vehiculo_edit"), #Permite editar/actualizar el vehículo.
 ]

@@ -186,10 +186,6 @@ def modelo_dt(request):
         obj = paginator.page(draw).object_list
     except EmptyPage:
         obj = paginator.page(paginator.num_pages).object_list
-    
-#    datos = []
-#    for o in obj:
-#        datos.append({"id":o.id,"mark":o.mark__descript,"descript":o.descript})
 
     datos = [
         {
@@ -273,3 +269,12 @@ class VehiculoNewModal(SinAutorizacion,MixinSaveUser,CreateView):
     success_url=reverse_lazy("control:vehiculo_list")
     login_url = "usuarios:login"
     permission_required = "ctrl_comb.add_vehiculo"
+
+class VehiculoEditModal(SinAutorizacion,MixinSaveUser,UpdateView):
+    model=Vehiculo
+    template_name="ctrl_comb/vehiculo_modal.html"
+    context_object_name="obj"
+    form_class=VehiculoForm
+    success_url=reverse_lazy("control:vehiculo_list")
+    login_url = "usuarios:login"
+    permission_required = "ctrl_comb.change_vehiculo"

@@ -33,6 +33,6 @@
 {data:"mark"},{data:"modelo"},{ data:"register"},{ data:"year"}
 {% endblock%}
 {% block dtUrl %}{% url 'control:vehiculo_dt' %}{% endblock %}
-{% block dtUrlEdit %}/control/models/modal{% endblock %}
-{% block dtUrlDelete %}{% url 'control:modelo_list' %}delete/{% endblock %}
+{% block dtUrlEdit %}/control/vehicles/modal{% endblock %}
+{% block dtUrlDelete %}{% url 'control:vehiculo_list' %}delete/{% endblock %}
 {% block dtDescDelete %}mark,modelo,register,year{% endblock %}
