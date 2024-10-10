@@ -47,6 +47,10 @@
 
 <script>
     $(function(){
+        {% if obj %}
+        $("#id_mark").val("{{obj.modelo.mark.id}}").trigger('change');
+        $("#id_modelo").val("{{obj.modelo.id}}").trigger('change');
+        {% endif%}
         $(".form-select").select2({ theme:"bootstrap-5"});
         $("#id_modelo").chained("#id_mark");
     })
