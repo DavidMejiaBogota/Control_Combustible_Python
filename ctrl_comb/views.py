@@ -270,6 +270,12 @@ class VehiculoNewModal(SinAutorizacion,MixinSaveUser,CreateView):
     login_url = "usuarios:login"
     permission_required = "ctrl_comb.add_vehiculo"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["marcas"] = Mark.objects.all()
+        context["modelos"] = Modelo.objects.all()
+        return context
+
 class VehiculoEditModal(SinAutorizacion,MixinSaveUser,UpdateView):
     model=Vehiculo
     template_name="ctrl_comb/vehiculo_modal.html"
@@ -284,6 +290,5 @@ class VehiculoDelete(DeleteView):
     template_name="bases/delete.html"
     context_object_name="obj"
     success_url=reverse_lazy("control:vehiculo_list")
-    #login_url = "usuarios:login"
-    #permission_required = "ctrl_comb.delete_vehiculo"
+
 
