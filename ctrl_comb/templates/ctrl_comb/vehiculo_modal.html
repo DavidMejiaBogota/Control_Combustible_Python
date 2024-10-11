@@ -32,9 +32,14 @@
                         </select>
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-6">{{form.register|as_crispy_field}}</div>
                     <div class="col-6">{{form.year|as_crispy_field}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6">{{form.tipo|as_crispy_field}}</div>
+                    <div class="col-6">{{form.unidad_medida|as_crispy_field}}</div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -50,7 +55,11 @@
         {% if obj %}
         $("#id_mark").val("{{obj.modelo.mark.id}}").trigger('change');
         $("#id_modelo").val("{{obj.modelo.id}}").trigger('change');
+
+        $("#tipo").val("{{obj.tipo}}")
+        $("#unidad_medida").val("{{obj.unidad_medida}}")
         {% endif%}
+        
         $(".form-select").select2({ theme:"bootstrap-5"});
         $("#id_modelo").chained("#id_mark");
     })
