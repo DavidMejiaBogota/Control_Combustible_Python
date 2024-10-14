@@ -1,0 +1,40 @@
+#Este archivo docker-compose.yml tiene la función de definir y gestionar la configuración de
+#una aplicación compuesta por múltiples contenedores Docker.
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    networks:
+      - webnet
+  
+  db:
+    image: postgres:15
+    volumes:
+      - ../data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=control_combustible
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - webnet
+volumes:
+  pg_data:
+
+    networks:
+      webnet:
+    
