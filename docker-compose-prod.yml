@@ -35,6 +35,6 @@ services:
 volumes:
   pg_data:
 
-    networks:
-      webnet:
+networks:
+  webnet:
     
