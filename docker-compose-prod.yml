@@ -32,6 +32,7 @@ services:
       retries: 5
     networks:
       - webnet
+      
   nginx:
     image: nginx
     ports:
@@ -40,8 +41,9 @@ services:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - web
-    
-    
+    networks:
+      - webnet
+
 volumes:
   pg_data:
 
